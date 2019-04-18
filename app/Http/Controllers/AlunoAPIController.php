@@ -38,13 +38,13 @@ class AlunoAPIController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Aluno::create(
-            [
-                'nome' => strtolower($request->post('nome')),
-                'email' => strtolower($request->post('email')),
-                'dt_nascimento' => $request->post('dt_nascimento')
-            ]);
+        $aluno = array(
+            'nome' => strtolower($request->post('nome')),
+            'email' => strtolower($request->post('email')),
+            'dt_nascimento' => $request->post('dt_nascimento')
+        );
+
+        Aluno::create($aluno);
 
         return redirect('api/alunos')->with('success', 'Aluno cadastrado com sucesso!');
     }
@@ -84,12 +84,13 @@ class AlunoAPIController extends Controller
     {
         // $id = $request->route('aluno');
 
-        Aluno::find($id)->update(
-                            [
-                                'nome' => strtolower($request->post('nome')),
-                                'email' => strtolower($request->post('email')),
-                                'dt_nascimento' => $request->post('dt_nascimento')
-                            ]);
+        $aluno = array (
+            'nome' => strtolower($request->post('nome')),
+            'email' => strtolower($request->post('email')),
+            'dt_nascimento' => $request->post('dt_nascimento')
+        );
+
+        Aluno::find($id)->update($aluno);
 
         return redirect('api/alunos')->with('success', 'Aluno atualizado com sucesso!');
     }
